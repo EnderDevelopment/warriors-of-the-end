@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "warriors_of_the_end",
+  "version": "${mod_version}",
+  "name": "Warriors of the End",
+  "description": "A mod featuring diamond-like armor and netherite-tier weapons",
+  "authors": ["Your Name"],
+  "contact": {
+    "homepage": "https://example.com",
+    "sources": "https://github.com/yourusername/warriors_of_the_end"
+  },
+  "license": "MIT",
+  "icon": "assets/warriors_of_the_end/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.warriors_of_the_end.WarriorsOfTheEndMod"
+    ]
+  },
+  "mixins": [
+    "warriors_of_the_end.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric-api": "*",
+    "minecraft": "1.21.11"
+  }
+}

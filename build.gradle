@@ -1,0 +1,60 @@
+plugins {
+    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'Minecraft'
+        url = 'https://libraries.minecraft.net/'
+    }
+}
+
+extraProperties {
+    properties {
+        mod_version = project.property('mod_version')
+        minecraft_version = project.property('minecraft_version')
+        loader_version = project.property('loader_version')
+        maven_group = project.property('maven_group')
+        archives_base_name = project.property('archives_base_name')
+        fabric_version = project.property('fabric_version')
+        fabric_api_version = project.property('fabric_api_version')
+        yarn_mappings = project.property('yarn_mappings')
+        java_version = project.property('java_version')
+        forge_version = project.property('forge_version')
+        neogradle_version = project.property('neogradle_version')
+    }
+}
+
+loom {
+    minecraft {
+        mappings = project.property('yarn_mappings')
+        runs {
+            client {
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            }
+            server {
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.property('minecraft_version')
+    inputs.property "mod_version", project.property('mod_version')
+}
